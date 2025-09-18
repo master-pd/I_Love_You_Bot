@@ -19,8 +19,14 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-updater = Updater(BOT_TOKEN, use_context=True)
-dispatcher = updater.dispatcher
+from telegram.ext import ApplicationBuilder
+
+app = ApplicationBuilder().token(BOT_TOKEN).build()
+
+# Example CommandHandler
+# app.add_handler(CommandHandler("start", start_function))
+
+app.run_polling()
 
 # Admin check
 def is_admin(update: Update):
