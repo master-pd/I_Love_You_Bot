@@ -36,7 +36,7 @@ This bot connects your phone with Telegram and lets you control it securely when
 
 ### 1️⃣ Clone the repository  
 ```bash
-git clone https://github.com/your-username/ILoveYou-Bot.git
+git clone https://github.com/master-pd/I_Love_You_Bot.git
 cd ILoveYou-Bot
 ```
 
@@ -101,7 +101,7 @@ The author is not responsible for any misuse.
 ```bash
 pkg update -y && pkg upgrade -y
 pkg install python git -y
-git clone https://github.com/your-username/ILoveYou-Bot.git
+git clone https://github.com/master-pd/I_Love_You_Bot.git
 cd ILoveYou-Bot
 echo "python-telegram-bot==20.3
 requests" > requirements.txt
