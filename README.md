@@ -70,21 +70,21 @@ python bot.py
 
 Command	Action
 
-/start	Activate bot and check status
-/photo	Capture a photo from the camera
-/video	Record a short video
-/screenshot	Take a screenshot
-/files	List recent files
-/contacts	Fetch saved contacts
-/deviceinfo	Show phone model, brand, Android
-/battery	Show battery level & charging status
-/network	Show WiFi / Data info
-/volume up	Increase volume
-/volume down	Decrease volume
-/mute	Mute phone volume
-/lock	Lock the screen
-/type <text>	Auto-type custom text
-/location	Send GPS location (if allowed)
+-/start	Activate bot and check status
+-/photo	Capture a photo from the camera
+-/video	Record a short video
+-/screenshot	Take a screenshot
+-/files	List recent files
+-/contacts	Fetch saved contacts
+-/deviceinfo	Show phone model, brand, Android
+-/battery	Show battery level & charging status
+-/network	Show WiFi / Data info
+-/volume up	Increase volume
+-/volume down	Decrease volume
+-/mute	Mute phone volume
+-/lock	Lock the screen
+-/type <text>	Auto-type custom text
+-/location	Send GPS location (if allowed)
 
 
 
