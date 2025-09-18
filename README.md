@@ -58,7 +58,7 @@ Create config.py with:
 # Config File
 BOT_TOKEN = "your-bot-token"
 CHAT_ID   = "your-chat-id"
-PASSWORD  = "Rana2005"   # optional
+PASSWORD  = "your password"   # optional
 
 4️⃣ Run the bot
 ```
@@ -106,7 +106,14 @@ cd ILoveYou-Bot
 echo "python-telegram-bot==20.3
 requests" > requirements.txt
 pip install -r requirements.txt
+```
+```
 echo "BOT_TOKEN = 'your-bot-token'" > config.py
 echo "CHAT_ID = 'your-chat-id'" >> config.py
-echo "PASSWORD = 'Rana2005'" >> config.py
+echo "PASSWORD = 'your password'" >> config.py
+
+```
+Run bot 
+```
 python bot.py
+```
