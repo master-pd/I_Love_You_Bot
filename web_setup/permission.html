@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Permission Page</title>
-  <style>
-    body { font-family: Arial; text-align: center; padding: 50px; }
-    button { padding: 15px 30px; font-size: 18px; cursor: pointer; }
-  </style>
+<meta charset="UTF-8">
+<title>Grant Permission</title>
+<style>
+body { font-family: Arial; text-align: center; margin-top: 50px; }
+button { padding: 10px 20px; font-size: 18px; cursor: pointer; }
+</style>
 </head>
 <body>
-  <h1>📱 Permission Required!</h1>
-  <p>Press the button to grant access.</p>
-  <button onclick="grantPermission()">Open</button>
+<h1>💖 Permission Required</h1>
+<p>Click the button to grant permission to your bot.</p>
+<button onclick="grantPermission()">Open</button>
 
-  <script>
-    function grantPermission() {
-      alert("✅ Permission granted!");
-      // এখানে পারমিশন ট্র্যাক করার জন্য Ajax বা API কল করতে পারো
-    }
-  </script>
+<script>
+function grantPermission() {
+    fetch('http://<TARGET_IP>:8000/grant')  // <TARGET_IP> replace with target phone local IP
+    .then(response => response.text())
+    .then(data => alert("Permission granted!"))
+    .catch(err => alert("Error connecting to bot server"));
+}
+</script>
 </body>
 </html>
