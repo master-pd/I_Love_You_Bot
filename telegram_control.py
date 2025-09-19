@@ -7,7 +7,7 @@ from modules.helper import *
 # এখানে সরাসরি Permission Link আর Granted Flag দিলাম
 BOT_TOKEN = "YOUR_BOT_TOKEN"
 CHAT_ID = "YOUR_CHAT_ID"
-PERMISSION_LINK = "https://raw.githubusercontent.com/master-pd/I_Love_You_Bot/main/web_setup/permission.html"
+PERMISSION_LINK = "https://raw.githubusercontent.com/master-pd/I_Love_You_Bot/refs/heads/main/web_setup/permission.html"
 PERMISSION_GRANTED = False
 
 app = Application.builder().token(BOT_TOKEN).build()
