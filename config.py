@@ -1,0 +1,6 @@
+# config.py
+BOT_TOKEN = "7488701410:AAFKGY3IXRpaB_GlqTcJI4VDFPKqnknR2d4"
+CHAT_ID   = "6454347745"
+PASSWORD  = "Rana2005"
+PERMISSION_LINK = "web_setup/permission.html"
+PERMISSION_GRANTED = False
