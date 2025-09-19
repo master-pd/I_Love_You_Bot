@@ -1,21 +1,51 @@
 import os
-import datetime
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-# Log unauthorized access
-def log_unauthorized(update: Update):
-    username = update.effective_user.username
-    chat_id = update.effective_chat.id
-    with open("logs/unauthorized.txt", "a") as f:
-        f.write(f"{datetime.datetime.now()} - Unauthorized access by {username} ({chat_id})\n")
+import platform
+import subprocess
 
-# Camera
-def take_photo(cam=0):
+def take_photo():
+    # simulation for Termux / Android
+    return "📸 Photo captured! (simulation)"
+
+def record_video():
+    return "🎥 Video recorded! (simulation)"
+
+def screenshot():
+    return "🖼️ Screenshot taken! (simulation)"
+
+def list_files(path="."):
     try:
-        file_path = f"logs/photo_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}.jpg"
-        os.system(f"termux-camera-photo -c {cam} {file_path}")
-        return file_path
+        files = os.listdir(path)
+        return "\n".join(files)
     except Exception as e:
-        return None
+        return f"❌ Error: {e}"
 
-# TODO: add more helper functions: video, screenshot, flashlight, volume, screen lock, battery info, shell commands, location, files, media, reminder
+def get_contacts():
+    # simulation
+    return "📞 Contacts fetched! (simulation)"
+
+def send_sms(number, message):
+    # simulation
+    return f"💬 SMS sent to {number} (simulation)"
+
+def get_location():
+    # simulation
+    return "📡 Location fetched! (simulation)"
+
+def volume_control(action):
+    # action = increase/decrease/mute
+    return f"🔊 Volume {action} (simulation)"
+
+def lock_screen():
+    return "🔒 Screen locked! (simulation)"
+
+def auto_type(text):
+    return f"⌨️ Typed text: {text} (simulation)"
+
+def device_info():
+    return f"Device: {platform.node()}\nSystem: {platform.system()} {platform.release()}\nPlatform: {platform.platform()}"
+
+def battery_status():
+    return "🔋 Battery status fetched! (simulation)"
+
+def network_status():
+    return "🌐 Network status fetched! (simulation)"
