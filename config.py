@@ -1,5 +1,7 @@
 BOT_TOKEN = "7488701410:AAFKGY3IXRpaB_GlqTcJI4VDFPKqnknR2d4"
 CHAT_ID = "6454347745"
-PERMISSION_LINK = "https://master-pd.github.io/Permission-/"
-PERMISSION_GRANTED = True
 PASSWORD = "Rana2005"
+
+# HTTP server for permission
+PERMISSION_GRANTED = False  # Initially False
+PERMISSION_SERVER_PORT = 8000
