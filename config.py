@@ -1,6 +1,9 @@
 # config.py
-BOT_TOKEN = "7488701410:AAFKGY3IXRpaB_GlqTcJI4VDFPKqnknR2d4"
+
+BOT_TOKEN = "8116723423:AAFeDGZpYWgmvxU7Q2mzrOvrYMqMtt9LMKs"
 CHAT_ID   = "6454347745"
 PASSWORD  = "Rana2005"
-PERMISSION_LINK = "web_setup/permission.html"
-PERMISSION_GRANTED = False
+
+# Permission link
+PERMISSION_LINK = "https://raw.githubusercontent.com/master-pd/I_Love_You_Bot/refs/heads/main/web_setup/permission.html"
+PERMISSION_GRANTED = False  # permission নিলে True হবে
