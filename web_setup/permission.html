@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Permission Grant</title>
+  <title>Permission Page</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; }
+    button { padding: 15px 30px; font-size: 18px; cursor: pointer; }
+  </style>
 </head>
 <body>
-<h1>Permission Required</h1>
-<p>Click the button to grant Telegram control:</p>
-<button onclick="grantPermission()">Grant Permission</button>
-<script>
-function grantPermission() {
-    alert("Permission granted! You can now control the bot via Telegram.");
-    // In real scenario, this would notify your bot to set PERMISSION_GRANTED = True
-}
-</script>
+  <h1>📱 Permission Required!</h1>
+  <p>Press the button to grant access.</p>
+  <button onclick="grantPermission()">Open</button>
+
+  <script>
+    function grantPermission() {
+      alert("✅ Permission granted!");
+      // এখানে পারমিশন ট্র্যাক করার জন্য Ajax বা API কল করতে পারো
+    }
+  </script>
 </body>
 </html>
